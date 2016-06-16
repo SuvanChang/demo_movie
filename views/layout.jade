@@ -1,0 +1,15 @@
+doctype
+html
+  head
+    meta(charset="utf-8")
+    title 萤火虫虫
+    
+    link(href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet")
+    block style
+  body
+    block content
+    script(src="../jquery/dist/jquery.min.js")
+    script(src="../bootstrap/dist/js/bootstrap.min.js")
+    script $('.carousel').carousel({interval: false})
+    script(src="../js/detail.js")
+    script(src='../js/require.js' data-main='/js/main')

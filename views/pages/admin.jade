@@ -1,0 +1,72 @@
+doctype
+html
+  head
+    meta(charset='utf-8')
+    title 管理页
+    link(href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet")
+  body
+    h1.text-center Movie Administration
+    table.table.table-striped.table-bordered.table-condensed.text-center(style="margin:auto;width:800px")
+      thead
+        tr.row
+          th.text-center.col-md-4 影名
+          th.text-center.col-md-4 movieId
+          th.text-center.col-md-4 操作
+      tbody
+        -for(var i=0;i<movies.length;i++){
+          tr.row
+            td.col-md-4 #{movies[i].title}
+            td.col-md-4 #{movies[i].movieId}
+            td.row.col-md-4
+              span.col-md-4
+                a(href="#",data-toggle="modal",data-target="#check")
+                  button.btn.btn-info.btnCheck(data-info="#{movies[i].movieId}") 查看
+              span.col-md-4
+                a(href="#",data-toggle="modal",data-target="#update")
+                  button.btn.btn-warning.btnUpdate(data-info="#{movies[i].movieId}") 修改
+              span.col-md-4  
+                button.btn.btn-danger.btnDelete(data-info="#{movies[i].movieId}") 删除
+        -}
+        tr.row
+          td(colspan="3")
+            span
+                a(href="#",data-toggle="modal",data-target="#addmovie")
+                  button.btn.btn-warning.addmovie 添加
+    .modal.fade(id='check', tabindex='-1', role='dialog', aria-labelledby='modal-label', aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal')
+              span(aria-hidden='true') &times;
+              span.sr-only 关闭;                  
+            h4#modal-label.modal-title 电影详细信息              
+          .modal-body.checkInfo              
+          .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal')  关闭;
+    .modal.fade(id='update', tabindex='-1', role='dialog', aria-labelledby='modal-label', aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal')
+              span(aria-hidden='true') &times;
+              span.sr-only 关闭;                  
+            h4#modal-label.modal-title 修改电影信息              
+          .modal-body.updateInfo              
+          .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal')  关闭;
+            button.btn.btn-warning.updateConfirm(type='button', data-dismiss='modal')  确认修改;
+    .modal.fade(id='addmovie', tabindex='-1', role='dialog', aria-labelledby='modal-label', aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal')
+              span(aria-hidden='true') &times;
+              span.sr-only 关闭;                  
+            h4#modal-label.modal-title 添加电影信息              
+          .modal-body.addmovieInfo              
+          .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal')  关闭;
+            button.btn.btn-warning.addmovieConfirm(type='button', data-dismiss='modal')  确认添加;
+    script(src="../jquery/dist/jquery.min.js")
+    script(src="../bootstrap/dist/js/bootstrap.min.js")
+    script(src="/js/admin.js")

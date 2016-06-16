@@ -1,0 +1,113 @@
+extend ../layout.jade
+block style
+  style
+    |html{height:100%}
+    |body{padding-top:50px;background-image:url('/img/bgimg.jpg');background-size:cover;color:#bbb;height:100%;}
+    |.navbar{background-color:#000;}
+    |button{background-color:#000;}
+    |.col-md-3 h3{text-align:center;color:#fff;font-weight:bold;font-size:30px;text-shadow:0 0 25px #000}
+    |.col-md-3 img{width:100%;max-width:200%;height:360px;box-shadow:0 0 5px 5px #999;}
+    |.col-md-3 h4{color:#eee;font-weight:normal;height:25px;padding:0;margin:8px 0 0 0;padding:0;}
+    |.col-md-3 p{color:#eee;height:25px;padding:0;margin-top:3px;}
+    |.navbar-brand{font-weight:bold;font-size:22px;text-shadow:0 0 10px yellow;}
+    |.score{color:SpringGreen;height:25px;display:block;padding-top:10px;}
+    |@media screen and (max-width:1000px){.col-md-3 img{height:auto;}
+    |@media screen and (max-width:768px){a.navbar-brand{display:none;}}
+    |@media screen and (max-width:500px){a.navbar-brand{display:none;}
+    | .navbar-header img{display:none;}}
+
+
+block content
+  nav.navbar.navbar-default.navbar-fixed-top.navbar-inverse(role='navigation')
+    .container
+      .row
+        .col-xs-4
+          .navbar-header
+            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collape-1')
+              span.sr-only Toggle navigation
+              |   
+              span.icon-bar
+              |   
+              span.icon-bar
+              |   
+              span.icon-bar
+            |   
+            img.pull-left(src='/img/logo.jpg', height='50px')
+            |   
+            a.navbar-brand(href='###',style="color:Greenyellow;") 萤火虫虫
+        |   
+        .col-xs-4
+          form(role='form', style='position:relative;top:8px;')
+            .form-group
+              input.form-control(type='text', placeholder='搜索内容')
+              button(type='submit', style='position:absolute;top:0;right:0;width:10%;min-width:40px;height:100%;border-radius:4px')
+                span.glyphicon.glyphicon-search
+        |   
+        .col-xs-4
+          #bs-example-navbar-collape-1.collapse.navbar-collapse
+            ul.nav.navbar-nav.pull-right
+              li.active
+                a(href='###') &#x767B;&#x5F55;
+              |   
+              li
+                a(href='###') &#x6CE8;&#x518C;
+  #ad-carousel.carousel.slide(data-ride='carousel')
+    .carousel-inner
+      - var moviesArray = movies
+      - for(var i =0 ;i<moviesArray.length;i+=4){
+        if(i==0)
+          .item.active
+            .container
+              .row
+                - for(var j=i;j<i+4&&j<moviesArray.length;j++) {
+                .col-md-3
+                  h3 #{moviesArray[j].title}
+                  img(src="#{moviesArray[j].imgsrc}" data-detail="detail-#{j}")
+                  ul.details(id="detail-#{j}" style="display:none;")
+                    li "title":"#{moviesArray[j].detail.title}"
+                    li "videosrc":"#{moviesArray[j].detail.videosrc}"
+                    li "director":"#{moviesArray[j].detail.director}"
+                    li "actor":"#{moviesArray[j].detail.actor}"
+                    li "kind":"#{moviesArray[j].detail.kind}"
+                    li "area":"#{moviesArray[j].detail.area}"
+                    li "releaseDate":"#{moviesArray[j].detail.releaseDate}"
+                    li "duration":"#{moviesArray[j].detail.duration}"
+                    li "content":"#{moviesArray[j].detail.content}"
+                  h4 #{moviesArray[j].summary.summarytitle}
+                  p #{moviesArray[j].summary.summarycontent}
+                  p
+                    span.score <strong>评分</strong> #{moviesArray[j].comment.score} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评价:
+                      span.scoreBash(data-url="/score")
+                    p <strong>点评</strong> #{moviesArray[j].comment.shortcomment}
+                - }    
+        else
+          .item 
+            .container
+              .row
+                - for(var j=i;j<i+4&&j<moviesArray.length;j++) {
+                .col-md-3
+                  h3 #{moviesArray[j].title}
+                  img(src="#{moviesArray[j].imgsrc}" data-detail="detail-#{j}")
+                  ul.details(id="detail-#{j}" style="display:none;")
+                    li "title":"#{moviesArray[j].detail.title}"
+                    li "videosrc":"#{moviesArray[j].detail.videosrc}"
+                    li "director":"#{moviesArray[j].detail.director}"
+                    li "actor":"#{moviesArray[j].detail.actor}"
+                    li "kind":"#{moviesArray[j].detail.kind}"
+                    li "area":"#{moviesArray[j].detail.area}"
+                    li "releaseDate":"#{moviesArray[j].detail.releaseDate}"
+                    li "duration":"#{moviesArray[j].detail.duration}"
+                    li "content":"#{moviesArray[j].detail.content}"
+                  h4 #{moviesArray[j].summary.summarytitle}
+                  p #{moviesArray[j].summary.summarycontent}
+                  p
+                    span.score <strong>评分</strong> #{moviesArray[j].comment.score}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评价:
+                      span.scoreBash(data-url="/score")
+                    p <strong>点评</strong> #{moviesArray[j].comment.shortcomment}
+                - }  
+      - }
+      a.left.carousel-control(href='#ad-carousel', data-slide='prev')
+        span.glyphicon.glyphicon-chevron-left
+      |     
+      a.right.carousel-control(href='#ad-carousel', data-slide='next')
+        span.glyphicon.glyphicon-chevron-right
